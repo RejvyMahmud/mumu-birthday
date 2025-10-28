@@ -197,6 +197,25 @@
             font-size: 1.1em;
         }
 
+        .reveal-btn {
+            background: linear-gradient(135deg, #df0e53 0%, #e4618d 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            font-family: 'Georgia', serif;
+        }
+
+        .reveal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
         .music-control {
             position: fixed;
             bottom: 30px;
@@ -277,7 +296,7 @@
                 Today, I celebrate not just your birthday, but the incredible person you are. <span class="highlight">You deserve all the happiness in the world</span>, and I hope to be the one who can bring a smile to your face every single day.
             </p>
             <p>
-                What I'm trying to say is... <span class="highlight" style="font-size: 1.3em;">  I **** ***, Mumuuu. ❤️</span> <b style="color:orange;"> Don't worry</b>  <span style="color: red;"><b>I hate you, Mumuuu.</b> 💕</span>
+                What I'm trying to say is... <span class="highlight" style="font-size: 1.3em;">I <button id="revealBtn" class="reveal-btn">Click Me! 💝</button><span id="hiddenMessage" style="display: none;">lo**</span>...</span> <b style="color:orange;"> Don't worry</b>  <span id="hateText" style="color: red; display: none;"><b>I hate you, Mumuuu.</b> 💕</span>
             </p>
             <p>
                 May this year bring you endless joy, success, me and all your heart desires. <span class="highlight"> Happy Birthday!  Sweetheart🎉</span>
@@ -294,7 +313,7 @@
         <source src="perfect.m4a" type="audio/mpeg">
     </audio>
 
-  <script>
+    <script>
         // Create floating hearts
         function createHeart() {
             const heart = document.createElement('div');
@@ -334,6 +353,34 @@
                 isPlaying = true;
             }
         }
+
+        // Reveal message function
+        function revealMessage() {
+            const btn = document.getElementById('revealBtn');
+            const hiddenMsg = document.getElementById('hiddenMessage');
+            const hateText = document.getElementById('hateText');
+            
+            // Add explosion effect
+            btn.style.transform = 'scale(0)';
+            btn.style.opacity = '0';
+            
+            setTimeout(() => {
+                btn.style.display = 'none';
+                hiddenMsg.style.display = 'inline';
+                hiddenMsg.style.animation = 'fadeIn 1s ease';
+                
+                // Show "I hate you" after 2 seconds with surprise
+                setTimeout(() => {
+                    hateText.style.display = 'inline';
+                    hateText.style.animation = 'fadeIn 0.5s ease';
+                }, 2000);
+            }, 300);
+        }
+
+        // Add click event to button
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('revealBtn').addEventListener('click', revealMessage);
+        });
 
         // Auto-play music on load and add confetti effect
         window.addEventListener('load', () => {
